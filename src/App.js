@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './components/TodoForm';
 import Todo from './components/Todo'
+import TodoList from './components/TodoList';
 
 const todo = [
   {
@@ -22,51 +23,55 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-        todo: todo
+      todo: todo
     }
   }
 
-  handleDone = (id)=> {
+  handleCompleted = (id)=> {
     this.setState({
       todo: this.state.todo.map(item => {
-        if(item.id === id){
+        if (item.id === id) {
           return({
             ...item,
-            done: !item.completed
-          })
+            completed: !item.completed
+          });
         }
-        return item
+
+        return item;
       })
-    })
+    });
   }
 
   handleAddItem = (task) => {
     const newItem = {
       task: task,
       id: Date.now(),
-      completed: false,
+      completed: false
     }
 
     this.setState({
       todo: [...this.state.todo, newItem]
-    })
+    });
   }
 
   handleClear = () => {
     this.setState({
       ...this.state,
       todo: this.state.todo.filter(item=>{
-        return(item.completed === false)
+        return(item.completed === false);
       })
-    })
+    });
   }
+
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoForm handleAddItem={this.handleAddItem}/>
-        <Todo handleClear={this.handleClear} handleDone={this.handleDone} todo={this.state.todo}/>
-      </div>
+      <div className="App">
+        <div className="header">
+           <h1>Shopping List</h1>
+           <TodoForm handleAddItem={this.handleAddItem}/>
+         </div>
+        <TodoList handleClear={this.handleClear} handleCompleted={this.handleCompleted} todo={this.state.todo} />
+       </div>
     );
   }
 }

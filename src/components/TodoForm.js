@@ -4,7 +4,7 @@ class TodoForm extends React.Component {
     constructor() {
         super();
         this.state={
-            inputValue:''
+            inputValue:""
         }
     }
 
@@ -29,5 +29,5 @@ class TodoForm extends React.Component {
         )
     }
 }
-
+  
 export default TodoForm
